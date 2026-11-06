@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examen_Final · Panel CRUD</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">E</span>
+<div>
+  <h1>Examen_Final</h1>
+        <p>Panel de administración</p>
+      </div>
+    </div>
+    <!-- Muestra si el backend logró conectarse a la BD en la nube -->
+    <span id="estado-bd" class="estado">Conectando…</span>
+  </header>
+
+  <!-- ===================== PESTAÑAS ===================== -->
+  <nav class="tabs" role="tablist">
+    <button class="tab activa" data-tab="productos" role="tab">
+      Productos <span id="badge-productos" class="badge">0</span>
+    </button>
+    <button class="tab" data-tab="categorias" role="tab">
+      Categorías <span id="badge-categorias" class="badge">0</span>
+    </button>
+  </nav>
+
+  <main>
+    <!-- ===================== PRODUCTOS ===================== -->
+    <section id="panel-productos" class="panel activo">
+      <form id="form-producto" class="card formulario" autocomplete="off">
+        <h2 id="titulo-form-producto">Nuevo producto</h2>
+        <input type="hidden" id="producto-id" />
+
+        <label>
+          Nombre
+          <input id="producto-nombre" type="text" maxlength="100" required placeholder="Ej. Mouse inalámbrico" />
+        </label>
+
+        <div class="fila">
+          <label>
+            Precio (Q)
+            <input id="producto-precio" type="number" step="0.01" min="0" required placeholder="0.00" />
+          </label>
+          <label>
+            Stock
+            <input id="producto-stock" type="number" step="1" min="0" required value="0" />
+          </label>
+        </div>
+
+        <label>
+          Categoría
+          <select id="producto-categoria" required></select>
+        </label>
+
+        <div class="acciones">
+          <button type="submit" class="btn primario" id="btn-guardar-producto">Guardar producto</button>
+          <button type="button" class="btn" id="btn-cancelar-producto" hidden>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="card tabla-card">
+        <div class="tabla-header">
+          <h2>Productos</h2>
+          <input id="buscar-producto" type="search" placeholder="Buscar por nombre o categoría…" />
+        </div>
+        <div class="tabla-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th class="num">Precio</th>
+                <th class="num">Stock</th>
+                <th class="col-acciones"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-productos"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CATEGORÍAS ===================== -->
+    <section id="panel-categorias" class="panel">
+      <form id="form-categoria" class="card formulario" autocomplete="off">
+        <h2 id="titulo-form-categoria">Nueva categoría</h2>
+        <input type="hidden" id="categoria-id" />
+
+        <label>
+          Nombre
+          <input id="categoria-nombre" type="text" maxlength="50" required placeholder="Ej. Impresoras" />
+        </label>
+
+        <label>
+          Descripción <span class="opcional">(opcional)</span>
+          <textarea id="categoria-descripcion" maxlength="200" rows="3" placeholder="Breve descripción"></textarea>
+        </label>
+
+        <div class="acciones">
+          <button type="submit" class="btn primario" id="btn-guardar-categoria">Guardar categoría</button>
+          <button type="button" class="btn" id="btn-cancelar-categoria" hidden>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="card tabla-card">
+        <div class="tabla-header">
+          <h2>Categorías</h2>
+          <input id="buscar-categoria" type="search" placeholder="Buscar categoría…" />
+        </div>
+        <div class="tabla-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th class="num">Productos</th>
+                <th class="col-acciones"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-categorias"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mensajes emergentes -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
