@@ -1,6 +1,6 @@
-# CRUD Tienda: BD en la nube + Backend + Frontend
+# CRUD Examen_Final: BD en la nube + Backend + Frontend
 
-Proyecto completo para los 3 temas del examen:
+Proyecto completo
 
 | Tema | Dónde está |
 |---|---|
@@ -9,7 +9,7 @@ Proyecto completo para los 3 temas del examen:
 | **Frontend** | `public/` (HTML + CSS + JavaScript con `fetch`) |
 
 ```
-crud-tienda/
+crud-Examen_Final/
 ├── database/
 │   ├── schema.sql        ← crea las 5 tablas + datos de ejemplo
 │   └── consultas.sql     ← JOINs y CRUD de práctica
@@ -60,7 +60,7 @@ crud-tienda/
    - Presiona el botón **Connect** (arriba en el panel).
    - Copia el texto que empieza con `postgresql://...` (incluye usuario, contraseña y host).
 
-> 💡 Puedes volver a correr `schema.sql` cuando quieras: borra todo y deja los datos de ejemplo limpios. Útil antes del examen.
+>  Puedes volver a correr `schema.sql` cuando quieras: borra todo y deja los datos de ejemplo limpios. Útil antes del examen.
 
 ---
 
@@ -89,8 +89,7 @@ DATABASE_URL=postgresql://neondb_owner:TU_CLAVE@ep-algo-123456-pooler.us-east-2.
 PORT=3000
 ```
 
-> ⚠️ El archivo se debe llamar exactamente `.env` (en Windows revisa que no quede como `.env.txt`).
-> ⚠️ **Nunca** subas `.env` a GitHub: tiene tu contraseña. Ya está en `.gitignore`.
+
 
 ---
 
@@ -152,7 +151,7 @@ Puedes probarla con **Postman** o la extensión **Thunder Client** de VS Code.
 
 ---
 
-## Si en el examen te dan OTRA base de datos
+
 
 **Si es PostgreSQL** (lo más fácil): ejecuta `schema.sql` en esa BD y cambia solo el `.env`. Si te dan los datos por separado, comenta `DATABASE_URL` y llena:
 
@@ -173,8 +172,8 @@ DB_SSL=true
 | Parámetros en SQL | `$1, $2` | `?, ?` | `:1, :2` o `:nombre` |
 | Autoincremento | `GENERATED ALWAYS AS IDENTITY` | `AUTO_INCREMENT` | `GENERATED ALWAYS AS IDENTITY` (12c+) |
 | Texto / número | `VARCHAR`, `NUMERIC` | `VARCHAR`, `DECIMAL` | `VARCHAR2`, `NUMBER` |
-| `RETURNING *` | ✅ Sí | ❌ No (usa `insertId` + `SELECT`) | Solo `RETURNING col INTO :var` |
-| Commit | Automático | Automático | ⚠️ **Manual**: usa `{ autoCommit: true }` |
+| `RETURNING *` |  Sí |  No (usa `insertId` + `SELECT`) | Solo `RETURNING col INTO :var` |
+| Commit | Automático | Automático |  **Manual**: usa `{ autoCommit: true }` |
 | Nombres de columnas en el resultado | minúsculas | como en la tabla | MAYÚSCULAS por defecto |
 
 Si te toca MySQL u Oracle, avísame y te paso las versiones de `db.js`, las rutas y `schema.sql` para ese motor.
@@ -197,7 +196,7 @@ Si te toca MySQL u Oracle, avísame y te paso las versiones de `db.js`, las ruta
 
 ## (Opcional) Subir también el backend y frontend a la nube
 
-El examen solo pide la BD en la nube, pero si quieres una URL pública:
+
 
 1. Sube el proyecto a GitHub (sin el `.env`).
 2. En **https://render.com** → **New** → **Web Service** → elige tu repositorio.
