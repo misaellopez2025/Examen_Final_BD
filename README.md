@@ -141,7 +141,6 @@ Puedes probarla con **Postman** o la extensión **Thunder Client** de VS Code.
 
 ---
 
-## Para explicarlo en el examen (guion corto)
 
 1. **Normalización:** "Partí de una tabla de facturas sin normalizar con datos repetidos. En 1FN separé los valores múltiples; en 2FN quité las dependencias parciales (factura, producto, detalle); en 3FN quité las transitivas (cliente y categoría)." → enseña `NORMALIZACION.md`.
 2. **Base de datos en la nube:** "Está en Neon, que es PostgreSQL administrado. Las tablas tienen PK, FK, UNIQUE y CHECK." → enseña el SQL Editor de Neon.
