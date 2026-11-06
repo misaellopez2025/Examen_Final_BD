@@ -85,8 +85,11 @@ h2 { font-size: 1.05rem; }
   margin: 20px auto 0;
   padding: 0 28px;
   border-bottom: 1px solid var(--line);
+  overflow-x: auto;
 }
 .tab {
+  flex-shrink: 0;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -236,7 +239,10 @@ td.desc { color: var(--muted); max-width: 320px; }
 .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .col-acciones { width: 1%; white-space: nowrap; text-align: right; }
 
+.nowrap { white-space: nowrap; }
+.sub { margin-top: 2px; font-size: 0.82rem; color: var(--muted); }
 .chip {
+  white-space: nowrap;
   display: inline-block;
   padding: 2px 9px;
   border-radius: 999px;
@@ -253,6 +259,57 @@ td.desc { color: var(--muted); max-width: 320px; }
   font-weight: 600;
 }
 .vacio { padding: 36px 20px; text-align: center; color: var(--muted); }
+
+/* ---------- Facturas ---------- */
+/* En Facturas el formulario va arriba y la tabla abajo, a todo lo ancho */
+.panel.activo.panel-ancho { grid-template-columns: 1fr; }
+.panel-ancho .formulario { position: static; max-width: 620px; }
+.fila-factura { grid-template-columns: 1fr 150px; }
+.detalle { display: flex; flex-direction: column; gap: 8px; }
+.lineas { display: flex; flex-direction: column; gap: 8px; }
+.lineas-header,
+.linea {
+  display: grid;
+  grid-template-columns: 1fr 62px 96px 34px;
+  gap: 8px;
+  align-items: center;
+}
+.lineas-header {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.linea select, .linea input { padding: 8px 9px; }
+.btn-quitar {
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--danger);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.btn-quitar:hover { background: var(--danger-soft); border-color: var(--danger-soft); }
+.btn-agregar {
+  align-self: flex-start;
+  padding: 7px 12px;
+  border-style: dashed;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.total-factura {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+.total-factura strong { font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+td.resumen { max-width: 420px; font-size: 0.85rem; color: var(--muted); }
 
 /* ---------- Toast (mensajes) ---------- */
 .toast {
@@ -286,7 +343,8 @@ td.desc { color: var(--muted); max-width: 320px; }
 /* ---------- Responsive (celular) ---------- */
 @media (max-width: 860px) {
   .topbar, .tabs, main { padding-left: 16px; padding-right: 16px; }
-  .panel.activo { grid-template-columns: 1fr; }
+  .topbar { flex-wrap: wrap; }
+  .panel.activo, .panel.activo.panel-ancho { grid-template-columns: 1fr; }
   .formulario { position: static; }
   .tabla-header { flex-direction: column; align-items: stretch; }
   .tabla-header input { max-width: none; }

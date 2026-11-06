@@ -10,6 +10,8 @@ const express = require('express');
 const pool = require('./db');
 const categoriasRouter = require('./routes/categorias');
 const productosRouter = require('./routes/productos');
+const clientesRouter = require('./routes/clientes');
+const facturasRouter = require('./routes/facturas');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +35,8 @@ app.get('/api/health', async (req, res, next) => {
 // ---------- Rutas CRUD ----------
 app.use('/api/categorias', categoriasRouter);
 app.use('/api/productos', productosRouter);
+app.use('/api/clientes', clientesRouter);
+app.use('/api/facturas', facturasRouter);
 
 // ---------- 404 para rutas de la API que no existen ----------
 app.use('/api', (req, res) => {
@@ -51,8 +55,8 @@ app.use((err, req, res, next) => {
       return res.status(409).json({
         error:
           req.method === 'DELETE'
-            ? 'No se puede eliminar: tiene registros relacionados (una categoría con productos o un producto que ya está en una factura).'
-            : 'El registro relacionado no existe (revisa la categoría seleccionada).',
+            ? 'No se puede eliminar: tiene registros relacionados (una categoría con productos, un producto en una factura o un cliente con facturas).'
+            : 'El registro relacionado no existe (revisa la categoría, el cliente o el producto seleccionado).',
       });
     case '23502': // not_null_violation
       return res.status(400).json({ error: 'Falta un campo obligatorio.' });
@@ -60,6 +64,9 @@ app.use((err, req, res, next) => {
       return res.status(400).json({ error: 'Un valor no cumple las reglas (por ejemplo, precio o stock negativo).' });
     case '22001': // string_data_right_truncation
       return res.status(400).json({ error: 'Un texto es demasiado largo.' });
+    case '22007': // invalid_datetime_format
+    case '22008': // datetime_field_overflow
+      return res.status(400).json({ error: 'La fecha no es válida.' });
     case '22003': // numeric_value_out_of_range
     case '22P02': // invalid_text_representation
       return res.status(400).json({ error: 'Un valor numérico no es válido.' });

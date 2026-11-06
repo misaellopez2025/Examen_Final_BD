@@ -11,8 +11,8 @@
   <header class="topbar">
     <div class="brand">
       <span class="logo" aria-hidden="true">E</span>
-<div>
-  <h1>Examen_Final</h1>
+      <div>
+        <h1>Examen_Final</h1>
         <p>Panel de administración</p>
       </div>
     </div>
@@ -27,6 +27,12 @@
     </button>
     <button class="tab" data-tab="categorias" role="tab">
       Categorías <span id="badge-categorias" class="badge">0</span>
+    </button>
+    <button class="tab" data-tab="clientes" role="tab">
+      Clientes <span id="badge-clientes" class="badge">0</span>
+    </button>
+    <button class="tab" data-tab="facturas" role="tab">
+      Facturas <span id="badge-facturas" class="badge">0</span>
     </button>
   </nav>
 
@@ -99,7 +105,7 @@
         </label>
 
         <label>
-          Descripción <span class="opcional">(opcional)</span>
+          <span>Descripción <span class="opcional">(opcional)</span></span>
           <textarea id="categoria-descripcion" maxlength="200" rows="3" placeholder="Breve descripción"></textarea>
         </label>
 
@@ -126,6 +132,119 @@
               </tr>
             </thead>
             <tbody id="tbody-categorias"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== CLIENTES ===================== -->
+    <section id="panel-clientes" class="panel">
+      <form id="form-cliente" class="card formulario" autocomplete="off">
+        <h2 id="titulo-form-cliente">Nuevo cliente</h2>
+        <input type="hidden" id="cliente-id" />
+
+        <label>
+          NIT
+          <input id="cliente-nit" type="text" maxlength="15" required placeholder="Ej. 1234567-8 o CF" />
+        </label>
+
+        <label>
+          Nombre
+          <input id="cliente-nombre" type="text" maxlength="100" required placeholder="Ej. María García" />
+        </label>
+
+        <label>
+          <span>Teléfono <span class="opcional">(opcional)</span></span>
+          <input id="cliente-telefono" type="tel" maxlength="15" placeholder="Ej. 5555-1234" />
+        </label>
+
+        <label>
+          <span>Correo <span class="opcional">(opcional)</span></span>
+          <input id="cliente-correo" type="email" maxlength="100" placeholder="Ej. maria@correo.com" />
+        </label>
+
+        <div class="acciones">
+          <button type="submit" class="btn primario" id="btn-guardar-cliente">Guardar cliente</button>
+          <button type="button" class="btn" id="btn-cancelar-cliente" hidden>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="card tabla-card">
+        <div class="tabla-header">
+          <h2>Clientes</h2>
+          <input id="buscar-cliente" type="search" placeholder="Buscar por NIT o nombre…" />
+        </div>
+        <div class="tabla-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NIT</th>
+                <th>Cliente</th>
+                <th>Teléfono</th>
+                <th class="num">Facturas</th>
+                <th class="col-acciones"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-clientes"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== FACTURAS ===================== -->
+    <section id="panel-facturas" class="panel panel-ancho">
+      <form id="form-factura" class="card formulario" autocomplete="off">
+        <h2 id="titulo-form-factura">Nueva factura</h2>
+        <input type="hidden" id="factura-id" />
+
+        <div class="fila fila-factura">
+          <label>
+            Cliente
+            <select id="factura-cliente" required></select>
+          </label>
+          <label>
+            Fecha
+            <input id="factura-fecha" type="date" required />
+          </label>
+        </div>
+
+        <!-- Detalle: una línea por producto (tabla detalle_factura) -->
+        <div class="detalle">
+          <div class="lineas-header" aria-hidden="true">
+            <span>Producto</span><span>Cant.</span><span>Precio (Q)</span><span></span>
+          </div>
+          <div id="factura-lineas" class="lineas"></div>
+          <button type="button" class="btn btn-agregar" id="btn-agregar-linea">+ Agregar producto</button>
+        </div>
+
+        <div class="total-factura">
+          <span>Total</span>
+          <strong id="factura-total">Q0.00</strong>
+        </div>
+
+        <div class="acciones">
+          <button type="submit" class="btn primario" id="btn-guardar-factura">Guardar factura</button>
+          <button type="button" class="btn" id="btn-cancelar-factura" hidden>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="card tabla-card">
+        <div class="tabla-header">
+          <h2>Facturas</h2>
+          <input id="buscar-factura" type="search" placeholder="Buscar por cliente, NIT o producto…" />
+        </div>
+        <div class="tabla-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Detalle</th>
+                <th class="num">Total</th>
+                <th class="col-acciones"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-facturas"></tbody>
           </table>
         </div>
       </div>
