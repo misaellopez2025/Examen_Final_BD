@@ -86,6 +86,7 @@ h2 { font-size: 1.05rem; }
   padding: 0 28px;
   border-bottom: 1px solid var(--line);
   overflow-x: auto;
+  overflow-y: hidden;
 }
 .tab {
   flex-shrink: 0;
@@ -96,7 +97,6 @@ h2 { font-size: 1.05rem; }
   padding: 10px 14px;
   border: 0;
   border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
   background: none;
   font: inherit;
   font-weight: 600;
